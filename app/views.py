@@ -4,8 +4,6 @@ from flask import render_template, flash, redirect, url_for
 from app.forms import LoginForm
 
 
-# app.config['SECRET_KEY'] = '12345678'
-
 @app.route('/')
 @app.route('/index')
 def index():
