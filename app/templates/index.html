@@ -3,6 +3,6 @@
 {% block content %}
     <h1>你好, {{ user.username }}!</h1>
     {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    <div><p>{{ post.author.username }} 说: <b>{{ post.body }}</b></p></div>
     {% endfor %}
 {% endblock %}

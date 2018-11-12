@@ -15,7 +15,7 @@ Session(app)
 
 
 # 注册路由
-from app.index import index_blue
+from .index import index_blue
 app.register_blueprint(index_blue)
 
 
