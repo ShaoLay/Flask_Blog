@@ -29,3 +29,9 @@ def login():
             form.username.data))
         return redirect(url_for('index'))
     return render_template('login.html',  title='登录', form=form)
+
+
+@app.route('/favicon.ico',methods=['GET'])
+def favicon():
+    """title左侧图标"""
+    return app.send_static_file('favicon.ico')
