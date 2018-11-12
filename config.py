@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-# from app import app
+
 
 
 class Config(object):
@@ -13,9 +13,10 @@ class Config(object):
     # 是否追踪数据库的修改：不追踪(节省开销)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # 配置redis数据库
+    REDIS_HOST = '127.0.0.1'
+    REDIS_PORT = 6379
 
-# app.config.from_object(Config)
-# db = SQLAlchemy(app)
 
 
 
