@@ -24,6 +24,9 @@ class Config(object):
     # 设置过期时间，要求'SESSION_PERMANENT', True。而默认就是31天
     PERMANENT_SESSION_LIFETIME = 60 * 60 * 24  # 一天有效期
 
+    # 开启csrf保护
+    CSRF_ENABLED = True
+    SECRET_KEY = 'you-will-never-guess'
 
 
 
