@@ -17,6 +17,17 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
 
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+# 从数据库中加载用户
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
