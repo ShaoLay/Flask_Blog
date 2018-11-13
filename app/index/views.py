@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for,session,request,g
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app import app, db, openid, login
@@ -51,9 +51,9 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('恭喜你，已经成功注册新用户')
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='注册', form=form)
 
 # 用户退出登录
 @app.route('/logout')
@@ -67,3 +67,13 @@ def logout():
 def favicon():
     """title左侧图标"""
     return app.send_static_file('favicon.ico')
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username)
+    posts = [
+        {'author':user, 'body':'Test post #1'},
+        {'author':user, 'body':'Test post #2'}
+    ]
+    return render_template('user.html',user=user, posts=posts)
