@@ -83,3 +83,19 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.datetime.now()
         db.session.commit()
+
+# 编辑个人资料
+@app.route('/edit_profile', methods=['GET','POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('你的个人资料已经修改完毕！')
+        return redirect(url_for('edit_profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html',title='修改个人资料',form=form)
