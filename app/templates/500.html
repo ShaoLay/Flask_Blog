@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>发生了一个意外的错误！</h1>
+    <p>网站管理员已经知晓这个错误了，稍后会修复，给您带来的不便，很抱歉。</p>
+    <p><a href="{{ url_for('index') }}">返回首页</a></p>
+{% endblock %}

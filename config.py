@@ -6,8 +6,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     """工程配置信息"""
-    DEBUG = True
-
+    DEBUG = False
+    # DEBUG = True
     # 数据库的配置信息
     # 配置Mysql数据库连接信息
     SQLALCHEMY_DATABASE_URI = 'mysql://root:970202@127.0.0.1:3306/Flask_Blog'
