@@ -31,7 +31,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('这个邮箱已经注册过用户了.')
 
 class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
-    submit = SubmitField('Submit')
+    username = StringField('用户名', validators=[DataRequired()])
+    about_me = TextAreaField('自我介绍', validators=[Length(min=0, max=140)])
+    submit = SubmitField('提交')
 
