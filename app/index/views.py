@@ -63,6 +63,7 @@ def logout():
 
 
 
+
 @app.route('/favicon.ico',methods=['GET'])
 def favicon():
     """title左侧图标"""
