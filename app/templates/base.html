@@ -5,16 +5,17 @@
         {% else %}
         <title>欢迎你，守望者</title>
         {% endif %}
+    <style type="text/css">a {text-decoration: none}</style>
     </head>
     <body>
         <div>
             守望者:
-            <a href="{{ url_for('index') }}">首页</a>
+            <a href="{{ url_for('index') }}">&nbsp;&nbsp;首页 &nbsp;&nbsp;| </a>
             {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">登录</a>
+            <a href="{{ url_for('login') }}"> &nbsp;&nbsp;登录 |</a>
             {% else %}
-                <a href="{{ url_for('user', username=current_user.username) }}">个人信息</a>
-            <a href="{{ url_for('logout') }}">退出</a>
+                <a href="{{ url_for('user', username=current_user.username) }}">&nbsp;&nbsp;个人信息&nbsp;&nbsp;|</a>
+            <a href="{{ url_for('logout') }}">&nbsp;&nbsp;退出</a>
             {% endif %}
         </div>
         <hr>
