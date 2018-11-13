@@ -61,9 +61,6 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
-
-
 @app.route('/favicon.ico',methods=['GET'])
 def favicon():
     """title左侧图标"""
