@@ -29,19 +29,7 @@ openid = OpenID(app, os.path.join(basedir, 'tmp'))
 from .index import index_blue
 app.register_blueprint(index_blue)
 
-# if not app.debug:
-#     if app.config['MAIL_SERVER']:
-#         auth = None
-#         if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
-#             auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-#         secure = None
-#         if app.config['MAIL_USE_TLS']:
-#             secure = ()
-#         mail_handler = SMTPHandler(
-#             mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT'])
-#             fromaddr = 'no-reply'
-#         )
-
+# 程序出现bug，给管理员发送邮件 & 记录到日志中去
 if not app.debug:
     if app.config['MAIL_SERVER']:
         auth = None
