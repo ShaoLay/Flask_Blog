@@ -31,6 +31,14 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = 'you-will-never-guess'
 
+    # 通过电子邮件给管理员发送邮件
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    ADMINS = ['javs_shao@163.com']
+
 
 
 
