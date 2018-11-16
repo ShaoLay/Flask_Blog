@@ -38,3 +38,6 @@ class EditProfileForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField('说点什么吧', validators=[DataRequired()])
     submit = SubmitField('提交')
+
+class SearchForm(PostForm):
+    search = StringField('search', validators=[DataRequired()])

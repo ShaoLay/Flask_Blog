@@ -1,10 +1,17 @@
+import sys
 from _md5 import md5
 from datetime import datetime
 
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db, login
+from app import db, login, app
+
+if sys.version_info >= (3, 0):
+    enable_search = False
+else:
+    enable_search = True
+    import flask_whooshalchemy as whooshalchemy
 
 
 # 关注着
@@ -73,6 +80,9 @@ def load_user(id):
     return User.query.get(int(id))
 
 class Post(db.Model):
+
+    __searchable__ = ['body']
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -81,4 +91,5 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
-
+if enable_search:
+    whooshalchemy.whoosh_index(app, Post)

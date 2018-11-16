@@ -1,4 +1,3 @@
-from flask_session import Session
 from redis import StrictRedis
 
 import os
@@ -41,6 +40,12 @@ class Config(object):
 
     # 设置每页显示博文条数
     POSTS_PER_PAGE = 10
+
+    # 告诉扩展全文搜索数据库的名称
+    WHOOSH_BASE = os.path.join(basedir, 'Flask_Blog')
+
+    # 指明搜索结果返回的最大数量
+    MAX_SEARCH_RESULT = 50
 
 
 

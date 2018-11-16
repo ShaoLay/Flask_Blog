@@ -5,7 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app import app, db, openid, login
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, SearchForm
 from app.models import User, Post
 
 
@@ -73,21 +73,25 @@ def favicon():
     """title左侧图标"""
     return app.send_static_file('favicon.ico')
 
+# 个人中心
 @app.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = [
-        {'author':user, 'body':'Test post #1'},
-        {'author':user, 'body':'Test post #2'}
+        {'author':user, 'body':'这是测试数据 #1'},
+        {'author':user, 'body':'这是测试数据 #2'}
     ]
     return render_template('user.html',user=user, posts=posts)
+
 
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.datetime.now()
+        db.session.add(current_user)
         db.session.commit()
+        current_user.search_form = SearchForm()
 
 # 编辑个人资料
 @app.route('/edit_profile', methods=['GET','POST'])
@@ -144,3 +148,22 @@ def unfollow(username):
     db.session.commit()
     flash('你没有关注 {}.'.format(username))
     return redirect(url_for('user', username=username))
+
+# 全文搜索
+@app.route('/search', methods = ['POST'])
+@login_required
+def search():
+    if not current_user.search_form.validate_on_submit():
+        return redirect(url_for('index'))
+    return redirect(url_for('search_results', query = current_user.search_form.search.data))
+
+# from config import MAX_SEARCH_RESULTS
+from config import Config
+@app.route('/search_results/<query>')
+@login_required
+def search_results(query):
+    results = Post.query.whoosh_search(query, Config.MAX_SEARCH_RESULTS).all()
+    return render_template('search_results.html',
+        query = query,
+        results = results)
+
