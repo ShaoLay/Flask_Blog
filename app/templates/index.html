@@ -19,9 +19,9 @@
         {% include '_post.html' %}
     {% endfor %}
     {% if prev_url %}
-    <a href="{{ prev_url }}">新提交的</a>
+        <a href="{{ prev_url }}"><h1>第一页内容</h1></a>
     {% endif %}
     {% if next_url %}
-    <a href="{{ next_url }}">以前提交的</a>
+        <a href="{{ next_url }}"><h1>下一页内容</h1></a>
     {% endif %}
 {% endblock %}
