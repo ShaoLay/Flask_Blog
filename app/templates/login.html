@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In</h1>
+    <h1>登录</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -22,4 +22,8 @@
         <p>{{ form.submit() }}</p>
     </form>
     <p>你是新用户？ <a href="{{ url_for('register') }}">点我注册</a></p>
+    <p>
+    忘记密码？
+        <a href="{{ url_for('reset_password_request') }}">点我重置密码</a>
+    </p>
 {% endblock %}

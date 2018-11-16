@@ -41,3 +41,15 @@ class PostForm(FlaskForm):
 
 class SearchForm(PostForm):
     search = StringField('search', validators=[DataRequired()])
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('电子邮件', validators=[DataRequired(), Email()])
+    submit = SubmitField('重置密码')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('密码', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('重置密码')

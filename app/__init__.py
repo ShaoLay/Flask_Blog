@@ -4,6 +4,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_openid import OpenID
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
@@ -23,6 +24,7 @@ Session(app)
 login = LoginManager(app)
 login.login_view = 'login'
 openid = OpenID(app, os.path.join(basedir, 'tmp'))
+mail = Mail(app)
 
 
 # 注册路由
