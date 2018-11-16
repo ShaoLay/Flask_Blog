@@ -39,6 +39,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['javs_shao@163.com']
 
+    # 设置每页显示博文条数
     POSTS_PER_PAGE = 10
 
 
