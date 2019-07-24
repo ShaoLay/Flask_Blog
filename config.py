@@ -3,6 +3,7 @@ from redis import StrictRedis
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config(object):
     """工程配置信息"""
     # DEBUG = False
